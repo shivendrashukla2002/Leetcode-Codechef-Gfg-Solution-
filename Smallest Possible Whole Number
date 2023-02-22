@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define aAmEaIn ios::sync_with_stdio(false); cin.tie(NULL);
+typedef long long ll;
+typedef long double ld;
+#define mod  1000000007
+#define mod2 998244353
+#define T(x) int x; cin >> x; while(x--)
+#define ob(x) __builtin_popcountll(x)
+#define zb(x) __builtin_ctzll(x)
+
+void solve(){
+    int N, K;
+    cin >> N >> K;
+    
+    if(K == 0){
+        cout << N << "\n";
+        return;
+    }
+    
+    cout << (N - (K * (N / K))) << "\n";
+}
+
+int main(){
+    aAmEaIn
+    T(x)
+    solve();
+}
