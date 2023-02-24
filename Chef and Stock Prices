@@ -1,0 +1,16 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int T;
+    cin >> T;
+	while (T--){
+	    int S, A, B, C; double stockPrice=0.0;
+	    cin >> S >> A >> B >> C;
+	    stockPrice = S + ( S * (C/100.0) );
+	    
+	    if (stockPrice >= A && stockPrice <= B) cout << "Yes\n";
+	    else cout << "No\n";
+	}
+	return 0;
+}
