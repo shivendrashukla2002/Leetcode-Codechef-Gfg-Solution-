@@ -1,0 +1,80 @@
+class Solution {
+    class Graph {
+		private int v;
+		private int e;
+		private Edge[] edges;
+
+		Graph(int v, int e) {
+			this.v = v;
+			this.e = e;
+			this.edges = new Edge[e];
+			for (int i = 0; i < this.e; i++) {
+				edges[i] = new Edge();
+			}
+		}
+
+		class Edge {
+			private int src;
+			private int dest;
+		}
+
+		class subset {
+			int parent;
+			int rank;
+		}
+
+		public int find(subset[] subsets, int u) {
+			if (subsets[u].parent != u)
+				subsets[u].parent = find(subsets, subsets[u].parent);
+			return subsets[u].parent;
+		}
+
+		public void union(subset[] subsets, int u, int v) {
+			int uRoot = find(subsets, u);
+			int vRoot = find(subsets, v);
+
+			if (subsets[uRoot].rank < subsets[vRoot].rank)
+				subsets[uRoot].parent = vRoot;
+			else if (subsets[vRoot].rank < subsets[uRoot].rank)
+				subsets[vRoot].parent = uRoot;
+			else {
+				subsets[uRoot].parent = vRoot;
+				subsets[vRoot].rank++;
+			}
+		}
+
+		public int kruskalMST() {
+			int redundantConnection = 0;
+			subset[] subsets = new subset[this.v];
+			for (int v = 0; v < this.v; v++) {
+				subsets[v] = new subset();
+				subsets[v].parent = v;
+				subsets[v].rank = 0;
+			}
+			for (int e = 0; e < this.e; e++) {
+				int u = find(subsets, edges[e].src);
+				int v = find(subsets, edges[e].dest);
+				if (u == v) {
+					redundantConnection++;
+				}
+				union(subsets, u, v);
+			}
+			int provinces = 0;
+			for (int v = 0; v < this.v; v++) {
+				if (subsets[v].parent == v) {
+					provinces++;
+				}
+			}
+			return provinces > redundantConnection + 1 ? -1 : provinces - 1;
+		}
+	}
+
+	public int makeConnected(int n, int[][] connections) {
+		Graph graph = new Graph(n, connections.length);
+		for (int i = 0; i < connections.length; i++) {
+			graph.edges[i].src = connections[i][0];
+			graph.edges[i].dest = connections[i][1];
+		}
+		return graph.kruskalMST();
+	}
+}
