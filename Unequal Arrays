@@ -1,0 +1,55 @@
+class Solution {
+  public:
+    long long solve(int N, vector<int> &A, vector<int> &B) {
+        long long  s1 =0;
+        
+        vector<int>oA;
+        vector<int>eA;
+        vector<int>oB;
+        vector<int>eB;
+        for(auto a : A)
+        {
+            if(a%2  == 0)
+                eA.push_back(a);
+            else
+                oA.push_back(a);
+            s1+=a;
+        }
+        
+        long long s2 = 0;
+        for(auto a : B)
+        {
+            if(a%2  == 0)
+                eB.push_back(a);
+            else
+                oB.push_back(a);
+            s2+=a;
+        }
+        
+        if(oA.size() != oB.size() || eA.size() != eB.size() || s1!=s2)
+            return -1;
+        else
+        {
+            sort(oA.begin() , oA.end());
+            sort(oB.begin() , oB.end());
+            sort(eA.begin() , eA.end());
+            sort(eB.begin() , eB.end());
+            long long ans = 0;
+            for(int i = 0 ; i<eA.size();i++)
+            {
+                long long x = abs(eA[i] - eB[i]);
+              //  cout<<x<<"e -";
+                ans += x/2;
+                
+            }
+            for(int i = 0 ; i<oA.size();i++)
+            {
+                long long x = abs(oA[i] - oB[i]);
+                ans += x/2;
+               // cout<<x<<endl;
+            }
+            
+            return ans/2;
+    }
+    }
+};
