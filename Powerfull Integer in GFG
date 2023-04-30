@@ -1,0 +1,30 @@
+class Solution{
+public:
+int powerfullInteger(int n,vector<vector<int>> &intervals,int k){
+        map<int , int>mp; //index , and freq
+        for(auto it : intervals){
+            int left = it[0];
+            int right= it[1];
+            mp[left]++;
+            mp[right + 1]--;
+        }
+        int prefixSum = 0;
+        int ans = -1;
+        bool flag = false;
+        for(auto it : mp){
+            prefixSum += it.second; // calculating prefix sum 
+            if(prefixSum >= k){
+                ans = it.first;
+                flag = true;
+            }
+            else if( flag == true ){
+                ans = it.first - 1;
+                flag = false;
+            }else{
+                flag = false;
+            }
+        }
+        return ans;
+        
+    }
+};    
