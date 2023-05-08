@@ -1,0 +1,14 @@
+class Solution{
+    public:
+        int modulo(string s,int m)
+        {
+            //code here
+            int ans = 0, power = 1;
+            for(int i = s.length()-1; i>= 0; i--){
+                ans += (s[i]-'0')*power;
+                power = (power*2)%m;
+                ans = (ans%m);
+            }
+            return ans;
+        }
+};
