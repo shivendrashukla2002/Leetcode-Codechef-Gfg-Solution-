@@ -1,0 +1,26 @@
+class Solution{
+    ArrayList<String> CamelCase(int N,String[] Dictionary,String Pattern){
+        ArrayList<String> ans = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            int count = 0;
+            for (int j = 0, k = 0; j < Dictionary[i].length() && k < Pattern.length(); j++) {
+                if (Character.isUpperCase(Dictionary[i].charAt(j))) {
+                    if (Dictionary[i].charAt(j) == Pattern.charAt(k)) {
+                        count++;
+                        k++;
+                    } else {
+                        break;
+                    }
+                }
+                if (count >= Pattern.length()) {
+                    ans.add(Dictionary[i]);
+                }
+                Collections.sort(ans);
+            }
+        }
+        if (ans.size() == 0) {
+            ans.add("-1");
+        }
+        return ans;
+    }
+}
