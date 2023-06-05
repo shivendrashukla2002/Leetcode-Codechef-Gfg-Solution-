@@ -1,0 +1,43 @@
+class Solution
+{
+    public:
+    //Function to find the least absolute difference between any node
+    //value of the BST and the given integer.
+    void inorder(Node *root,vector<int>&arr)
+    {
+        if(root!=NULL)
+        {
+            inorder(root->left,arr);
+            arr.push_back(root->data);
+            inorder(root->right,arr);
+        }
+    }
+    int minDiff(Node *root, int K)
+    {
+        vector<int>arr;
+        inorder(root,arr);
+        int comp=INT_MAX;
+        for(int i=0;i<arr.size();i++)
+        {
+            int z=arr[i]-K;
+            if(z>=0)
+            {
+                if(z<comp)
+                {
+                    comp=z;
+                }
+            }
+            else
+            {
+                z=z*-1;
+                if(z<comp)
+                {
+                    comp=z;
+                }
+                    
+            }
+            
+        }
+        return comp;
+    }
+};
