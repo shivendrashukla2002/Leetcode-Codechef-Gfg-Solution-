@@ -1,0 +1,23 @@
+class Solution
+{
+public:
+void permute(string &s,int k)
+{
+    int cnt=1;
+    do{
+        if(cnt==k)return;
+        cnt++;
+    }while(next_permutation(s.begin(),s.end()));
+}
+    string kthPermutation(int n, int k)
+    {
+        string s="";
+        for(int i=1;i<=n;i++)
+        {
+            char ch=i+'0';
+            s+=ch;
+        }
+        permute(s,k);
+        return s;
+    }
+};
