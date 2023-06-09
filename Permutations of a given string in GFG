@@ -1,0 +1,33 @@
+class Solution
+{
+public:
+void permute(string s,int l,int r,set<string>&st)
+{
+    if(l==r)
+    {
+        st.insert(s);
+    }
+    else{
+        for(int i=l;i<=r;i++)
+        {
+            swap(s[l],s[i]);
+            permute(s,l+1,r,st);
+            swap(s[l],s[i]);
+        }
+    }
+}
+vector<string>find_permutation(string S)
+{
+    // Code here there
+    int i=0;
+    int n=S.length()-1;
+    vector<string>ans;
+    set<string>st;
+    permute(S,i,n,st);
+    for(auto it:st)
+    {
+        ans.push_back(it);
+    }
+    return ans;
+}
+};
