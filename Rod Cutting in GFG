@@ -1,0 +1,40 @@
+class Solution{
+    public int func(int ind,int n,int []price,int dp[][])
+    {
+        if(ind==0)
+        {
+            return n*price[0];
+        }
+        if(dp[ind][n]!=-1)
+            return dp[ind][n];
+        int notpick=func(ind-1,n,price,dp);
+        int pick=Integer.MIN_VALUE;
+        if(ind+1<=n)
+        pick=price[ind]+func(ind,n-(ind+1),price,dp);
+        return dp[ind][n]=Math.max(pick,notpick);
+    }
+    public int cutRod(int price[], int n) {
+        int dp[][]=new int[n][n+1];
+        //code here
+        // for(int i[]:dp)
+        // {
+        //     Arrays.fill(i,-1);
+        // }
+         for(int i=0;i<=n;i++)
+            dp[0][i]=i*price[0];
+        
+        for(int i=1;i<n;i++)
+        {
+            for(int j=1;j<=n;j++)
+            {
+               int notpick=dp[i-1][j];
+        int pick=Integer.MIN_VALUE;
+        if(i+1<=j)
+        pick=price[i]+dp[i][j-(i+1)];
+         dp[i][j]=Math.max(pick,notpick); 
+            }
+        }
+        
+        return dp[n-1][n];
+    }
+}
