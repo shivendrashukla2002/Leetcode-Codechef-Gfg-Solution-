@@ -1,0 +1,11 @@
+class Solution {
+    int[] kLargest(int[] arr, int n, int k) {
+Arrays.sort(arr);
+int[] target = new int[k];
+int counter = 1;
+for(int i = 1 ; i<=k;i++){
+  target[i-1] = arr[arr.length-i];
+}
+return  target;
+}
+}
