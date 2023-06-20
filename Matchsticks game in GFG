@@ -1,0 +1,7 @@
+class Solution {
+    static int matchGame(Long N) {
+        int ans = (int)(N%5);
+        return ans == 0?-1:ans;
+        // code here
+    }
+};
