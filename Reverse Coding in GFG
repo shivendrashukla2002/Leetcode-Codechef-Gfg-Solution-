@@ -1,0 +1,8 @@
+class Solution {
+    static int sumOfNaturals(int n) {
+        // code here
+        long mod=1000000007;
+        long ans=(long)((long)n*(n+1)/2L)%mod;
+        return (int)ans;
+    }
+};
