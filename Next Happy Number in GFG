@@ -1,0 +1,31 @@
+class Solution{
+
+    static int nextHappy(int N){
+        // code here
+          for(int i =N+1; i<=100003; i++){
+            if(isHappy(i)){
+                return i;
+            }
+        }
+        return 1;
+    }
+    
+    static boolean isHappy(int N){
+        if(N==1) {
+            return true;
+        }else if(N<=9 && N != 7 && N!= 1){
+            return false;
+        }
+        return isHappy(digitSqSum(N));
+    }
+    
+    static int digitSqSum(int N){
+        int sum = 0;
+        while(N>0){
+            int d = N%10;
+            sum+= d*d;
+            N = N/10;
+        }
+        return sum;
+    }
+}
