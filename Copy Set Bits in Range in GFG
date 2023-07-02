@@ -1,0 +1,13 @@
+class Solution{
+    static int setSetBit(int x, int y, int l, int r){
+        int pos = 1;
+        while(y>0){
+            if(pos>=l && pos<=r && ((y&1)==1)){
+                x = x|(1<<(pos-1));
+            }
+            pos++;
+            y>>=1;
+        }
+        return x;
+    }
+}
