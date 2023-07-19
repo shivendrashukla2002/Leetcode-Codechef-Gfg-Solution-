@@ -1,0 +1,23 @@
+class Solution
+{
+    public int longestPalinSubseq(String S)
+    {
+        StringBuilder sb1=new StringBuilder(S);
+        String sb=sb1.reverse().toString();
+       int dp[][]=new int[sb.length()+1][S.length()+1];
+       for(int i=1;i<dp.length;i++)
+       {
+           for(int j=1;j<dp[i].length;j++)
+           {
+               if(S.charAt(i-1)==sb.charAt(j-1)){
+                   dp[i][j]=dp[i-1][j-1]+1;
+               }
+               else {
+                   dp[i][j]=Math.max(dp[i-1][j],dp[i][j-1]);
+               }
+           }
+       }
+       return dp[sb.length()][S.length()];
+    }
+}
+
