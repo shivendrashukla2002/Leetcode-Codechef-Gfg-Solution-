@@ -1,0 +1,21 @@
+class Solution
+{
+    public:
+    Node * removeDuplicates( Node *head) {
+        set<int> st;
+        Node* temp = head;
+        st.insert(temp->data);
+        while(temp->next) {
+            if(st.count(temp->next->data) > 0) {
+                // delete the duplicate node
+                Node* del = temp->next;
+                temp->next = del->next;
+                delete(del);
+            } else {
+                temp = temp->next;
+                st.insert(temp->data);
+            }
+        }
+        return head;
+    }
+};
