@@ -1,0 +1,45 @@
+class Spiral
+{
+    //Function to return a list containing the level order 
+    //traversal in spiral form.	
+    ArrayList<Integer> findSpiral(Node root) 
+    {
+        // Your code here
+        ArrayList<Integer> al=new ArrayList<>();
+        Queue<Node> q=new LinkedList<>();
+        q.add(root);
+        int l=1;
+        while(!q.isEmpty()){
+            int n=q.size();
+            if(l%2!=0){
+                Stack<Integer> st=new Stack<>();
+                for(int i=0;i<n;i++){
+                    Node temp=q.remove();
+                    st.push(temp.data);
+                    if(temp.left!=null){
+                        q.add(temp.left);
+                    }
+                    if(temp.right!=null){
+                        q.add(temp.right);
+                    }
+                }
+                while(st.size()!=0){
+                    al.add(st.pop());
+                }
+            }else{
+                for(int i=0;i<n;i++){
+                    Node temp=q.remove();
+                    al.add(temp.data);
+                    if(temp.left!=null){
+                        q.add(temp.left);
+                    }
+                    if(temp.right!=null){
+                        q.add(temp.right);
+                    }
+                }
+            }
+            l++;
+        }
+        return al;
+    }
+}
