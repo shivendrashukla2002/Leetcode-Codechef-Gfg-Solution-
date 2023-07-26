@@ -1,0 +1,23 @@
+void traverse(Node* root, int par, unordered_map<int,int> &m) {
+    if(root == NULL)
+        return;
+        
+    m[root->data] = par;
+    traverse(root->left,root->data,m);
+    traverse(root->right,root->data,m);
+}
+
+
+int kthAncestor(Node *root, int k, int node) {
+    unordered_map<int,int> m;
+    traverse(root,-1,m);
+    
+    int ans = -1;
+    
+    while(k-- && node != -1) {
+        ans = m[node];
+        node = ans;
+    }
+    
+    return ans;
+}
