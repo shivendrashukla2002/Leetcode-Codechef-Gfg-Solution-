@@ -1,0 +1,32 @@
+class Solution
+{
+    public ArrayList<String> permutation(String s)
+    {
+        ArrayList<String> ans = new ArrayList<>();
+        ArrayList<Integer> check = new ArrayList<>();
+        StringBuilder temp = new StringBuilder();
+        helper(0, check, ans, s, temp);
+        Collections.sort(ans);
+        return ans;
+    }
+    public void helper(int i, ArrayList<Integer> check, ArrayList<String> ans, String s, StringBuilder temp)
+    {
+        if(temp.length() == s.length())
+        {
+            ans.add(temp.toString());
+            return;
+        }
+        
+        for(int k=0; k<s.length(); k++)
+        {
+            if(!check.contains(k))
+            {
+                temp.append(s.charAt(k));
+                check.add(k);
+                helper(k+1, check, ans, s, temp);
+                temp.deleteCharAt(temp.length()-1);
+                check.remove(check.size()-1);
+            }
+        }
+    }
+}
