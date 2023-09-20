@@ -1,0 +1,35 @@
+class Solution
+{
+    
+    ArrayList<Integer> rotate(int N, int D)
+    {
+        // your code here
+        ArrayList<Integer> ans = new ArrayList<>();
+        int left = N;
+        int right = N;
+        for(int i=0; i<D; i++){
+            if((left&32768)==32768){
+                left<<=1;
+                left = left&65535;
+                left+=1;
+            }
+            else{
+                left= left<<1;
+                left = left&65535;
+            }
+        }
+        for(int i=0; i<D; i++){
+            if((right&1)==1){
+                right= right>>1;
+                right+= 32768;
+                
+            }
+            else{
+                right = right>>1;
+            }
+        }
+        ans.add(left);
+        ans.add(right);
+        return ans;
+    }
+}
